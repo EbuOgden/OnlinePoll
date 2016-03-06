@@ -1,0 +1,14 @@
+body {
+font-size:1.5em;
+}
+
+.myBadge {
+    min-height:15px;
+    min-width:15px;
+    width:auto;
+    padding: 1px 5px 3px 5px;
+    background-color:#4db6ac;
+    border-radius:40px;
+    color:black;
+    text-align:center;
+}

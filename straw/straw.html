@@ -1,0 +1,133 @@
+<head>
+    <title>StrawPoll</title>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+
+</body>
+
+
+<template name="homeTemplate">
+    <div class="section">
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Create a Poll.</div>
+                <div class="panel-body">
+                    <form method="post" name="pollForm" class="col l12 s12 m12">
+
+
+                        <div class="input-field">
+                            <i class="material-icons prefix" style="font-size:2.0em">subject</i>
+                            <textarea id="question" class="materialize-textarea"></textarea>
+                            <label for="question">Type your question here, options below</label>
+                        </div>
+                        <div class="inputContent">
+
+
+                            <div class="input-field">
+
+                                <i class="material-icons prefix" style="font-size:1.5em">add</i>
+
+                                <input type="text" name="option" onkeypress="yaz(1);" id="option1">
+                                <label for="option1">1)  Enter poll option...</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix" style="font-size:1.5em">add</i>
+                                <input type="text" onkeypress="yaz(2);" name="option" id="option2">
+                                <label for="option2">2)  Enter poll option...</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix" style="font-size:1.5em">add</i>
+                                <input type="text" onkeypress="yaz(3);" name="option" id="option3">
+                                <label for="option3">3)  Enter poll option...</label>
+                            </div>
+                            <div class="input-field">
+                                <i class="material-icons prefix" style="font-size:1.5em">add</i>
+                                <input type="text" onkeypress="yaz(4);" name="option" id="option4">
+                                <label for="option4">4)  Enter poll option...</label>
+
+                            </div>
+                        </div>
+                        <div>
+
+                            <br>
+                            <button href="#modal1" class="waves-effect waves-light btn red right modal-trigger" type="submit">Create Poll</button>
+                        </div>
+
+
+                    </form>
+                    <div id="modal1" class="modal" style="height:120px">
+
+                        <div class="modal-content">
+                            <div class="alert alert-success" role="alert">
+                                <h4>Poll Link :</h4>
+                                <span id="link"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</template>
+
+
+<template name="voteTemplate">
+    <form name="voteForm">
+        <div class="section">
+            <div class="container">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">{{anket.title}} <small>(Pick one or more)</small></div>
+                    <div class="panel-body">
+                        {{#each secenekler}}
+                        <div class="collection">
+                            <div class="alert alert-warning" role="alert" style="height:40px; padding-top:10px; margin-bottom:0px;">
+
+                                <input type="checkbox" name="option" id="{{_id}}" value="{{_id}}" />
+                                <label for="{{_id}}" style="font-size:15px">{{optionText}} </label>
+                            </div>
+                        </div>
+                        {{/each}}
+                        <button style="float:left" class="waves-effect waves-light btn teal accent-3 left" type="submit">Vote</button>
+                        <a href="/result/{{anket._id}}" class="waves-effect waves-light btn blue accent-3 right" style="float:right">Results</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</template>
+
+
+<template name="resultTemplate">
+    <div class="section">
+        <div class="container">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{anket.title}} <small>Results</small></div>
+                <div class="panel-body">
+                    {{#each secenekler}}
+                    <div class="collection">
+                        <div class="alert alert-success" role="alert" style="height:40px; padding-top:10px; margin-bottom:0px;">
+
+                            <input name="option" type="checkbox" disabled class="optionNumber  optionCheckbox" checked />
+                            <label for="{{_id}}" style="font-size:15px">{{optionText}} </label><span class="myBadge" style="float:right">{{voteRate}}</span>
+                        </div>
+                    </div>
+                    {{/each}}
+
+                    {{> highchartsHelper chartId="grafik" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</template>
+
